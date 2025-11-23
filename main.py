@@ -30,7 +30,7 @@ for fname in os.listdir(PS_DIR):
     path = os.path.join(PS_DIR, fname)
 
     print(f"\n➡ AC {ac_code}: {fname}")
-    booths = parse_polling_station_pdf(path, ac_code)
+    booths = parse_polling_station_pdf(path)
     print(f"Parsed {len(booths)} polling stations for AC {ac_code}")
     all_booths.extend(booths)
 
@@ -74,7 +74,10 @@ os.makedirs("output", exist_ok=True)
 # 3.1 booths.csv
 with open("output/booths.csv", "w", newline="", encoding="utf8") as f:
     w = csv.DictWriter(f, fieldnames=[
-        "ac",
+        "district_code",
+        "district_name",
+        "ac_code",
+        "ac_name",
         "ps_number_raw",
         "ps_number",
         "ps_suffix",
